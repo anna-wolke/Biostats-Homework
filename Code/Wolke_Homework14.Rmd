@@ -1,0 +1,55 @@
+---
+title: "Using dplyr to fix mistakes"
+author: "Anna"
+date: "10/2/2022"
+output: html_document
+---
+
+For this homework, I am practicing using dplyr functions to fix problems in my data. 
+
+Setting things up
+```{r}
+rm(list=ls())
+library(here)
+library(dplyr)
+library(ggplot2)
+```
+
+Importing the data and viewing the summary data with the summary() function
+```{r}
+DF <- read.csv(here("Data", "drug_resistance.csv"), stringsAsFactors = TRUE)
+summary(DF)
+# Running the data import with `stringsAsFactors = TRUE` shows more info about the factors within Treatment and tech,name rather than just summarizing them as character data
+```
+
+Examining the data with the unique() function
+```{r}
+unique(DF) # shows all the rows that are unique from eachother (no duplicate rows)
+```
+Using this function, we can see that there are errors in the Treatment and tech.name columns. "Control" is written in different ways and there are variations in capitalization in the tech.name column.
+
+To make all the control treatments as one uniform string variable, use the which() function. First, let's fix the variables within the Treatment column:
+```{r}
+controls <- which(DF$Treatment == "control" | DF$Treatment == "Control" | DF$Treatment == "cantrol")
+DF$Treatment[controls] <- "control"
+
+drug2 <- which(DF$Treatment == "drug x 2" | DF$Treatment == "Drugx2" | DF$Treatment == "drug2")
+DF$Treatment[drug2] <- "drug2"
+
+drug3 <- which(DF$Treatment == "drug3" | DF$Treatment == "drug x 3" | DF$Treatment == "Drug x 3")
+DF$Treatment[drug3] <- "drug3"
+```
+
+
+Now that the Treatment column is fixed, we have to fix the tech.name column. First, I will start with renaming the column name, then I will fix the variables.
+```{r}
+DF <- rename(DF, tech_name = "tech.name") #not necessary, but wanted to make this change for formatting purposes
+
+Brian <- which(DF$tech_name == "Brian" | DF$tech_name == "brian" | DF$tech_name == "brain")
+DF$tech_name[Brian] <- "Brian"
+
+Becca <- which(DF$tech_name == "Becca" | DF$tech_name == "becca")
+DF$tech_name[Becca] <- "Becca"
+```
+
+

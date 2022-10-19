@@ -1,0 +1,51 @@
+---
+title: "Wolke_HW12.Rmd"
+author: "Anna"
+date: "9/27/2022"
+output: html_document
+---
+
+Setting things up: Clear R's brain and import packages
+```{r}
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+library(here)
+```
+
+Importing the data from a .csv file
+```{r}
+Cover <- read.csv(here("Data", "donnerville_percent_cover.csv"), stringsAsFactors = TRUE)
+```
+
+Examining the data
+```{r}
+View(Cover)
+str(Cover)
+glimpse(Cover)
+tbl_df(Cover)
+
+names(Cover) #column headings
+head(Cover) #first 6 rows
+```
+
+Renaming column headers in the data frame
+```{r}
+Cover <- Cover %>% rename(plot_type = Plot.type, plot_dim = Plot.dim)
+```
+
+Determine the average percent cover by cover type (bare, bryophytes, vascular plants) for Donnerville 1
+```{r}
+Cover %>%
+  filter(Site == "Donnerville 1") %>%
+  group_by(Type) %>%
+  summarize(mean_percent = mean(Percent))
+```
+
+Determine the average percent vascular plant cover across all sites
+```{r}
+Cover %>%
+  filter(Type == "Vascular") %>%
+  summarize(vasc_percent = mean(Percent))
+```
+

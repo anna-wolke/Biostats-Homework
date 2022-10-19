@@ -1,0 +1,35 @@
+trappers,date,location,start_time,start_time_tod,end_time,end_time_tod,approx_temp_F,conditions,trap_zone,species,total_wt_g,bag_wt_g,sq_wt_g,sex,age,pit_tag_num,ear_tag_num,ear_tag_LR,fur_dye,freeze_brand,comments
+whole class,9/6/10,SLU campus,2:23,PM,3:30,PM,NA,"cloudy, cool",E,SCCA,860,NA,NA,M,adult,NA,1,R,right hip,right hip,slightly scrotal
+whole class,9/6/10,SLU campus,2:23,PM,3:30,PM,NA,"cloudy, cool",F,SCCA,NA,NA,NA,M,adult,NA,NA,NA,"right hip, two patches",right backleg,"missing tip of tail, slightly scrotal"
+whole class,9/6/10,SLU campus,2:23,PM,3:30,PM,NA,"cloudy, cool",B,SCCA,800,NA,NA,M,adult,NA,2,R,center rump,left leg,slightly scrotal
+whole class,9/6/10,SLU campus,2:23,PM,3:30,PM,NA,"cloudy, cool",B,SCCA,700,NA,NA,M,adult,NA,3,R,left leg,left middle,slightly scrotal
+whole class,9/6/10,SLU campus,2:23,PM,3:30,PM,NA,"cloudy, cool",B,SCCA,780,NA,NA,M,adult,NA,4,R,left middle,right middle,slightly scrotal
+"Erin, Hannah, Leah, Abbie",9/8/10,NA,7:30,AM,9:10,AM,65,"cool, partly cloudy",C,SCCA,950,NA,NA,F,adult,NA,5,L,back middle,left hip,nipples well developed and large
+"Erin, Hannah, Leah, Abbie",9/8/10,NA,7:30,AM,9:10,AM,65,"cool, partly cloudy",C,SCCA,750,NA,NA,F,adult,NA,7,L,left hip,center rump,nipples not developed
+"Erin, Hannah, Leah, Abbie",9/8/10,NA,7:30,AM,9:10,AM,65,"cool, partly cloudy",C,SCCA,730,NA,NA,M,adult,NA,8,R,left hip,left hip,tiny scrotal
+"Erin, Hannah, Leah, Abbie",9/8/10,NA,7:30,AM,9:10,AM,65,"cool, partly cloudy",C,SCCA,710,NA,NA,M,SA,NA,NA,NA,right middle,right shoulder,sub-adult
+"Erin, Hannah, Leah, Abbie",9/8/10,NA,7:30,AM,9:10,AM,65,"cool, partly cloudy",C,SCCA,780,NA,NA,F,NA,NA,NA,NA,NA,right hip,escape during freeze branding
+"Erin, Hannah, Leah, Abbie",9/8/10,NA,7:30,AM,9:10,AM,65,"cool, partly cloudy",C,SCCA,790,NA,NA,F,A,NA,9,L,right hip,right leg,"nipples large, right leg twitched then moved up"
+"Andrew Skaggs, Janet Sun, Eddie Richter",9/10/10,front of JHS,1:30,NA,3:10,PM,70,cloudy,C,SCCA,800,NA,NA,F,A,NA,10,L,LM to center rump,RH,well developed nipples
+"Andrew Skaggs, Janet Sun, Eddie Richter",9/10/10,front of JHS,1:30,NA,3:10,PM,70,cloudy,C,SCCA,790,NA,NA,M,A,NA,11,R,rt hip xx,RL,"caught earlier, 1/2 tail"
+"Andrew Skaggs, Janet Sun, Eddie Richter",9/10/10,front of JHS,1:30,NA,3:10,PM,70,cloudy,C,SCCA,870,NA,NA,F,A,NA,NA,NA,R leg,c shoulder,well developed nipples
+"Andrew Skaggs, Janet Sun, Eddie Richter",9/10/10,front of JHS,1:30,NA,3:10,PM,70,cloudy,C,SCCA,NA,NA,NA,F,A,NA,9,L,RL,RH,released
+"Andrew Skaggs, Janet Sun, Eddie Richter",9/10/10,front of JHS,1:30,NA,3:10,PM,70,cloudy,C,SCCA,710,NA,NA,M,A,NA,12,R,"LH, CR","CM, RH",semi scrotal
+"Andrew Skaggs, Janet Sun, Eddie Richter",9/10/10,front of JHS,1:30,NA,3:10,PM,70,cloudy,C,SCCA,750,NA,NA,F,A,NA,13,L,c shoulder,"c rump, c middle",nipples small
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,A9,SCCA,NA,NA,NA,NA,NA,NA,11,R,NA,NA,"roll-recap, released"
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,A10,SCCA,760,NA,NA,F,NA,NA,14,L,left and right leg,left leg,closer to left hip
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,A11,SCCA,850,NA,NA,M,NA,NA,15,R,2 on center middle,"center rump, right leg",scrotal tube slip during RL freeze
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,C6,SCCA,800,NA,NA,M,NA,NA,NA,NA,NA,right middle,"escaped, slightly scrotal"
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,F3,SCCA,750,NA,NA,F,NA,NA,16,L,"right hip, right shoulder","right leg, right hip",small nipples
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,A11,SCCA,870,NA,NA,M,NA,NA,17,R,"left leg, left shoulder","LL, LH",very scrotal
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,F5,SCCA,840,NA,NA,F,NA,NA,18,R,"LM, RM","LH, CR",small nipples
+"Malthus, Lizzy, Amanda, ELB",10/1/10,Campus,1:30,NA,4:00,PM,60,cloudy,C6,SCCA,790,NA,NA,M,NA,NA,19,R,"R leg, R hip","CR, CM",very scrotal
+"Jackie D, ELB, Eddie R, Jessica M",10/8/10,"Campus, see map",1:40,PM,NA,NA,65,"partly cloudy, breezy",C,SCCA,760,NA,NA,F,NA,NA,16,L,NA,NA,recapture
+"Jackie D, ELB, Eddie R, Jessica M",10/8/10,"Campus, see map",1:40,PM,NA,NA,65,"partly cloudy, breezy",C,SCCA,760,NA,NA,F,NA,NA,14,L,L knee,L leg,recapture
+"Jackie D, ELB, Eddie R, Jessica M",10/8/10,"Campus, see map",1:40,PM,NA,NA,65,"partly cloudy, breezy",E,SCCA,820,NA,NA,M,NA,NA,20,R,RM,"LH, RH",bloodied nose a little
+"Jackie D, ELB, Eddie R, Jessica M",10/8/10,"Campus, see map",1:40,PM,NA,NA,65,"partly cloudy, breezy",C,SCCA,740,160,NA,F,NA,NA,NA,NA,"LL, LH","RM, RL",escaped an ear tag
+"Jackie D, ELB, Eddie R, Jessica M",10/8/10,"Campus, see map",1:40,PM,NA,NA,65,"partly cloudy, breezy",E,SCCA,760,NA,NA,F,NA,NA,NA,NA,NA,NA,NA
+"Leah H, Kate A, Eddie R, Andrew S, ELB",9/1/11,around JHS,9:00,AM,11:30,AM,70,clear,NA,SCCA,850,160,690,M,1+,NA,51,R,NA,left leg,recap from `10 probab=R002
+"Leah H, Kate A, Eddie R, Andrew S, ELB",9/1/11,around JHS,9:00,AM,11:30,AM,70,clear,Java field,SCCA,800,160,640,F,SA,NA,NA,NA,"center rump, center shoulder","rt leg, rt hip",escape from ear tag
+"Leah H, Kate A, Eddie R, Andrew S, ELB",9/1/11,around JHS,9:00,AM,11:30,AM,70,clear,NA,SCCA,920,160,760,F,A,NA,7,L,left hip,ct rump,"nipples pronounced, recap from `10"
+"ELB, Maria H, Kate A, Erin S",9/2/11,around JHS,3:00,PM,NA,NA,80,"clear, humid, warm",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,no squirrels

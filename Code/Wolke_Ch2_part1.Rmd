@@ -1,0 +1,30 @@
+---
+title: "Wolke_Ch2_part1"
+author: "Anna"
+date: "9/18/2022"
+output: html_document
+---
+```{r}
+library(readr)
+compensation <- read_csv("~/Biostatistics/Wolke-Homework/Data/compensation.csv")
+```
+
+#2.2 Getting Data Into R
+```{r}
+compensation <- read.csv("/home/alwolk19/Biostatistics/Wolke-Homework/Data/compensation.csv")
+names(compensation)
+head(compensation)
+dim(compensation)
+str(compensation)
+
+read.csv("compensation.csv")
+file.choose()
+```
+
+#2.3 Checking Data 
+```{r}
+library(dplyr)
+glimpse(compensation)
+tbl_df(compensation)
+```
+

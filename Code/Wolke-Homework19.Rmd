@@ -1,0 +1,62 @@
+---
+title: "Wolke-Homework19.Rmd"
+author: "Anna"
+date: "10/16/2022"
+output: html_document
+---
+
+# Introduction
+For this homework assignment, my goal is to get more comfortable with the basics of RStudio (edittin)
+
+Setting things up:
+```{r}
+rm(list=ls()) #clears R's brain
+library(dplyr) #imports dplyr package
+library(here) #allows use of the here() function while importing data from a file
+```
+
+Import the data using the here() function and name it "Leaves":
+```{r}
+Leaves <- read.csv(here("Data", "Class_leaf_measurements.csv"), stringsAsFactors = TRUE) #reads the .csv file and makes it into a data frame
+```
+
+Examine the new dataset with the str() function
+```{r}
+str(Leaves) #shows the structure of the data frame
+```
+This specifies the factor data because I used stringsAsFactors = TRUE while importing the data
+
+Renaming column headers:
+```{r}
+Leaves <- rename(Leaves, "leaf_num" = Leaf.., "DBH_cm" = DBH..cm., "petiole_length" = Petiole.length) #for the rename() function, first list the DF, then put the new column header names in parentheses, equal to the old column header name
+```
+
+Since I already included stringsAsFactors = TRUE while importing the data,. Species is already a factor, and using the str() function shows that it has 9 levels. There should only be 3 species, so this tells me that there is inconsistancy in how the species names were entered into the original data. Time to fix that...
+```{r}
+unique(Leaves$Species) # this shows the unique levels within the Species data
+norway <- which(Leaves$Species == "Norway maple" | Leaves$Species == "Norway Maple" | Leaves$Species == "Norway mapel")
+sugar <- which(Leaves$Species == "sugar maple" | Leaves$Species == "Sugar Maple" | Leaves$Species == "Sugar maple")
+red <- which(Leaves$Species == "red maple" | Leaves$Species == "Red Maple" | Leaves$Species == "Red maple")
+```
+And then to make the official fix...
+```{r}
+Leaves$Species[norway] <- "Norway maple"
+Leaves$Species[sugar] <- "sugar maple"
+Leaves$Species[red] <- "red maple"
+```
+
+Making a new data frame "Sugar" to isolate the sugar maple data from the rest:
+```{r}
+Sugar <- Leaves %>%
+  select(-Person, -Tree_num, -leaf_num) %>%# to take out certain columns, use the select() function
+  filter(Species == "sugar maple") # this filters out all species that are not sugar maple
+```
+
+
+Now, we want to create a histogram of petiole lengths based on the Sugar data frame:
+```{r}
+hist(Sugar$petiole_length, main = "Histogram for Petiole Lengths", xlab = "Petiole length")
+# xlab changes the label on the x-axis
+# main changes the title
+```
+

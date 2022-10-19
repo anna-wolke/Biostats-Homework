@@ -1,0 +1,35 @@
+---
+title: "Wolke_Homework10.Rmd"
+author: "Anna"
+date: "9/23/2022"
+output: html_document
+---
+
+# Pulling squirrel data from Problem Set 1 into R
+
+## Clear R's brain:
+```{r}
+rm(list=ls())
+```
+
+## Retrieve data:
+```{r}
+library(here)
+DF <- read.csv(here("Data", "Wolke_PS1.csv"), stringsAsFactors = TRUE)
+```
+
+## Possible functions for examining the structure of DF:
+```{r}
+glimpse(DF) #shows data types
+str(DF) #shows data types
+names(DF)
+head(DF)
+tail(DF)
+dim(DF)
+```
+
+```{r}
+library(dplyr)
+tbl_df(DF)
+```
+

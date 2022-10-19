@@ -1,0 +1,95 @@
+---
+title: "Applying more dplyr to my data"
+author: "Anna"
+date: "9/28/2022"
+output: html_document
+---
+
+My goal for this homework is to begin to feel more comfortable using the dplyr functions from GSWR chapters 2 & 3. This includes subsetting, manipulating, and renaming data, as well as making new data frames.
+
+Setting things up
+```{r}
+rm(list=ls())
+library(here)
+library(dplyr)
+library(ggplot2)
+```
+
+Importing data from a .csv file and viewing it in a new tab
+```{r}
+DF <- read.csv(here("Data", "day_one_data_for_homework13.csv"))
+View(DF)
+```
+
+Summarizing the data
+```{r}
+summary(DF)
+```
+
+Renaming column headers
+```{r}
+names(DF) #copy the names from this output
+DF <- rename(DF, "Tree_num" = Tree..,"Species" = Tree.species, "leaf_length" = Leaf.length,"leaf_width" = leaf.width)
+```
+
+
+PROBLEM #1: leaf width and length unit discrepancy
+Fixing leaf measurements (first, grab data of interest)
+```{r}
+to_fix <- DF %>%
+  filter(leaf_units == "inches") %>%
+  select(c(leaf_length, leaf_width))
+View(to_fix)
+```
+Then, add two variables to this data frame by converting each measurement to a decimal (by hand or on paper)
+```{r}
+to_fix <- to_fix %>%
+  mutate(leaf_length_numeric = c(4.125, 6.938, 4.5, 3.75, 6))
+to_fix <- to_fix %>%
+  mutate(leaf_width_numeric = c(3.938, 6.5, 6.125, 3.0, 2.5))
+```
+Now, convert to cm
+```{r}
+to_fix <- to_fix %>%
+  mutate(leaf_length_cm = leaf_length_numeric*2.54, leaf_width_cm = leaf_width_numeric*2.54)
+```
+Now, we can put those values into DF using indexing
+```{r}
+DF$leaf_length[1:5] <- to_fix$leaf_length_cm[1:5]
+DF$leaf_width[1:5] <- to_fix$leaf_width_cm[1:5]
+```
+Change units for these new rows so they are cm
+```{r}
+DF$leaf_units[1:5] <- "cm"
+```
+Last step is to make leaf length and width as numeric variables
+```{r}
+DF$leaf_length <- as.numeric(DF$leaf_length)
+DF$leaf_width <- as.numeric(DF$leaf_width)
+```
+
+PROBLEM #2: Species
+```{r}
+unique(DF$Species) #all the species are listed in different ways and therefore are considered all unique strings
+```
+Find all the rows with maple in the name. Use the which() function to return row numbers
+```{r}
+maples <- which(DF$Species == "red maple" | DF$Species == "norway maple" | DF$Species == "Maple" | DF$Species == "maple" | DF$Species == "Red maple")
+
+DF$Species[maples] <- "maple species"
+```
+
+
+
+New data frame with a subset from the original DF
+```{r}
+English <- DF %>%
+  filter(leaf_units == "inches")
+```
+
+New data frame with dates correctly formatted. Use the filter() function to select certain observations.
+```{r}
+Uniform_dates <- DF %>%
+  filter(Date == "8/24/22")
+```
+

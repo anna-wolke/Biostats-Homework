@@ -1,0 +1,132 @@
+---
+title: "Wolke_HW11_GSWRCh3Ex1.Rmd"
+author: "Anna"
+date: "9/25/2022"
+output: html_document
+---
+
+Chapter 3 in GSWR is dedicated to data manipulation within R using the `dplyr` package. Let's dive into the fundamentals of data visualization and analysis...
+
+Setting things up
+```{r}
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+library(here)
+```
+
+Import the data set
+```{r}
+DF <- read.csv(here("Data", "compensation.csv"))
+glimpse(DF) #to check the structure of the data, learned in the last chapter
+```
+
+#3.1 SUMMARY STATS FOR EACH VARIABLE
+Using the `summary()` function allows you to see a summary of the stats of a data set, including
+minimum, IQR, median, mean, and maximum for the numeric columns. Levels and sample size are given for categorical columns
+```{r}
+summary(DF)
+```
+
+#3.2 DPLYR VERBS
+More helpful functions found in the `dplyr` package
+```{r}
+select() #selecting columns
+slice() #selecting rows
+filter() #selecting subsets of rows based on column values
+arrange() #sorting rows
+mutate() #creating new variables in a data frame
+```
+Key to remember: The first argument to all dplyr functions is the data frame (gives the function a reference to which data set you want to manipulate)
+
+#3.3 SUBSETTING
+Example of how to select the Fruit column in the compensation data
+```{r}
+select(DF, Fruit)
+```
+This asks for a part of a data frame, and returns a data frame to you
+Note: All dplyr functions only do one thing very quickly
+
+Example of how to select all columns EXCEPT the Root column
+```{r}
+select(DF, -Root) #add a minus sign to leave out a column from the returned data frame
+```
+
+Example of how to grab certain rows
+```{r}
+slice(DF, 2) #grabs a single row
+slice(DF, 2:10) #the : allows selection of a series of rows
+slice(DF, c(2,3,10)) #discontinuous sets are "collected" with the c() function
+```
+Note: the returned data frame does not display the row number identity from the original data frame
+
+Logical operators and booleans:
+```{r}
+with(DF, Fruit > 80)
+filter(DF, Fruit > 80)
+filter(DF, Fruit > 80 | Fruit < 20)
+```
+The logical operators/booleans are simple things you can ask R so it returns true/false data. Some logical operators include...
+`==` equals
+`!=` does not equal
+`<` less than
+`>` greater than
+`>=` greater than or equal to
+`<=` less than or equal to
+`|` or (between two logical operators)
+`&` and (between two logical operators)
+
+To use the outputs of these outputs in subsequent calculations/analysis, assign them to a variable
+```{r}
+lo_hi_fruit <- filter(DF, Fruit > 80 | Fruit < 20)
+lo_hi_fruit #run the variable to see the output
+```
+
+#3.4 TRANSFORMING
+Example of using the mutate() function to create a new column in the data frame:
+```{r}
+DF <- mutate(DF, logFruit = log(Fruit))
+head(DF)
+```
+Note: By working with data in R, we are never manipulating the original raw data because it is saved as a separate .csv file on our computer
+
+#3.5 SORTING 
+The arrange() function allows us to arrange rows in an order that makes sense, such as increasing Fruit production for the compensation data
+```{r}
+arrange(DF, Fruit)
+```
+
+#3.6 MINI-SUMMARY AND TIPS
+Top Tip 1: You can use more than one dplyr function in one line of code
+```{r}
+select(filter(DF, Fruit > 80), Root)
+```
+
+Top Tip 2: Use pipe commands! %>% means "put the answer of the left-hand command into the function on the right" and always start with the data frame
+```{r}
+DF %>%
+  filter(Fruit > 80) %>%
+    select(Root)
+#Shows the values of the Root column associated with the values of the Fruit columns where the fruit production is greater than 80
+```
+
+#CALCULATING SUMMARY STATS
+Method 1: Nesting
+```{r}
+mean.fruit <- summarize(
+  group_by(DF, Grazing), 
+    meanFruit = mean(Fruit))
+```
+
+Method 2: Piping
+```{r}
+DF %>%
+  group_by(Grazing) %>%
+    summarize(
+      meanFruit = mean(Fruit),
+      sdFruit = sd(Fruit))
+    
+```
+
+
+
