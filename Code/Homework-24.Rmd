@@ -81,13 +81,46 @@ A few points...
 
 What is the two-sample t-test? It compares the means of two groups of numeric values, and it can be used for groups with small sample sizes
 
+Let's look at ozone data as an example to practice t-tests...
+First, set things up:
+```{r}
+rm(list=ls())
+library(tidyverse)
+library(here)
+```
+Then pull in the data:
+```{r}
+ozone <- read.csv(here("Data", "ozone.csv"))
+glimpse(ozone)
+```
 
+By using glimpse(), I see that I have two categorical variables (Garden.location and Garden.ID) and one continuous variable (Ozone). Within the Garden.location variable, there are two options: East and West. A good way to visualize these data is with histograms to see the general spread. 
+Let's make that figure:
+```{r}
+ggplot(ozone, aes(x = Ozone)) +
+  geom_histogram(binwidth = 10) +
+  facet_wrap(~ Garden.location, ncol = 1) +
+  theme_bw()
+```
 
+Calculate mean and standard errors of ozone in the different locations:
+```{r}
+ozone %>%
+  group_by(Garden.location) %>%
+  summarize(mean_ozone = mean(Ozone),
+            sd_ozone = sd(Ozone))
+```
 
+Now I will do a t-test to determine if the ozone in each location type is significantly different:
+```{r}
+t.test(Ozone ~ Garden.location, data = ozone)
+```
+The resulting p-value is <0.05 so we reject the null hypothesis that there is no siginificant difference in ozone between East and West garden locations.
 
-
-
-
+Variance can be tested using var.test(), and is set up in a similar way to the t.test() function.
+```{r}
+var.test(Ozone ~ Garden.location, data = ozone)
+```
 
 
 
