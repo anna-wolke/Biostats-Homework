@@ -1,0 +1,93 @@
+---
+title: "Homework-24.Rmd"
+author: "Anna"
+date: "10/28/2022"
+output: html_document
+---
+
+# INTRODUCTION
+Always start data analysis with a figure before diving into the stats testing. This way, you can see expected results first and ensure that your statistical model is reliable
+
+Workflow for GSWR ch. 5:
+1. Plot your data 
+2. Build a model
+3. Check assumptions
+4. Interpret the model
+5. Replot the data and model
+
+# 5.2 Chi-squared contingency table analysis
+- Attempt to understand your hypothesis both biologically and statistically!
+- Chi-squared is an analysis of COUNT DATA (two or more categorical variables)
+
+Testing the null hypothesis that there is no association between frequency of black and red ladybirds...
+
+First, set things up
+```{r}
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+library(here)
+```
+
+Import the ladybirds data
+```{r}
+lady <- read.csv(here("Data", "ladybirds.csv"))
+glimpse(lady)
+```
+
+Test if the frequency of the two color morphs differ between two habitat sites. Start by organizing the data and calculating the totals for each color
+```{r}
+totals <- lady %>%
+  group_by(Habitat, colour) %>%
+  summarise(total.number = sum(number))
+```
+
+Use a bar chart* to summarize the raw data. This gives us a general idea of the spread of the data.
+```{r}
+ggplot(totals, aes(x = Habitat, y = total.number, fill = colour)) +
+  geom_bar(stat = 'identity', position = 'dodge') +
+# stat = 'identity' tells R not to try calculating anything from the data
+# position = 'dodge' tells R to use grouping to separate the bars into designated categories
+  scale_fill_manual(values = c(black = "black", red = "red"))
+# scale_fill_manual() allows you to change the colors of the bars 
+```
+*For count data, each bar is one point and there is no real zero or variation to examine, which is why a bar graph is appropriate here. 
+
+Making the chi-sq test:
+To make it do a two-way contingency test, we need to provide a matrix...
+```{r}
+lady.mat <- xtabs(number ~ Habitat + colour, data = lady)
+```
+
+Then using this matrix, we can perform the chi-sq test:
+```{r}
+chisq.test(lady.mat)
+```
+The resulting p-value is less than 0.05, so we can reject the null hypothesis. There is in fact an association between Habitat and colour morph.
+
+We can view the mechanics of the chi-sq test by assigning the chi-sq test outputs to a variable and looking at them...
+```{r}
+lady.chi <- chisq.test(lady.mat)
+names(lady.chi)
+lady.chi$expected
+```
+
+# 5.3 Two-sample t-test
+
+A few points...
+1. PLot your data!
+2. Check model assumptions
+3. R makes these two steps easy
+
+What is the two-sample t-test? It compares the means of two groups of numeric values, and it can be used for groups with small sample sizes
+
+
+
+
+
+
+
+
+
+
+

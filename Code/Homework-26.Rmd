@@ -1,0 +1,94 @@
+---
+title: "Homework-26.Rmd"
+author: "Anna"
+date: "11/2/2022"
+output: html_document
+---
+
+Setting things up:
+```{r}
+rm(list=ls())
+library(here)
+library(tidyverse) # Uploads dplyr and ggplot2
+library(ggfortify)
+```
+
+Importing the data:
+```{r}
+soil <- read.csv(here("Data", "soil_reduced-1.csv"), stringsAsFactors = T)
+```
+
+Before we begin any analysis, we need to check our data for possible errors/outliers. Let's begin with that.
+
+A. Forest names
+```{r}
+levels(soil$Forest)
+# All good, there are 5 different forests listed as expected
+```
+
+B. Soil Organic Matter and Soil Calcium
+```{r}
+#Start with a histogram for SOM %
+ggplot(soil, aes(x = SOM_percent)) +
+  geom_histogram()
+```
+
+Now check Soil Calcium
+```{r}
+ggplot(soil, aes(x = Ca_ppm)) +
+  geom_histogram()
+```
+
+Let's also run a summary on all the variables:
+```{r}
+summary(soil)
+```
+
+
+## We'd like to ask the following questions for these data:
+
+### 1. Is there a relationship between Soil organic matter (SOM, %) and soil calcium (Ca_ppm)?
+
+#### Plot relationship
+Both variables are continuous...
+```{r}
+ggplot(soil, aes(x = SOM_percent, y = Ca_ppm, color = Forest)) +
+  geom_point() +
+  theme_bw() +
+  xlab("Soil Organic Matter %") +
+  ylab("Calcium (ppm)")
+```
+From looking at the data, it appears there may be a weak positive relationship between SOM and Ca.
+
+Can I guess the slope or y-int?
+Slope is about 1000/53 (18ish) and the y-int is about -5
+
+What stats model fits these data?
+Both response and predictor are continuous, so linear regression seems appropriate
+
+So let's construct the model:
+```{r}
+SOM_Ca_mod <- lm(Ca_ppm ~ SOM_percent, data = soil)
+```
+
+Now I need to check model assumptions before interpreting.
+```{r}
+autoplot(SOM_Ca_mod)
+```
+Based on my observations of the autoplot() results, I am modestly comfortable that my data meet the lm() assumptions. 
+
+Now look at model outcome:
+```{r}
+anova(SOM_Ca_mod)
+```
+The p-value is greater than 0.05, so we accept the null hypothesis that there is no relationship between SOM and Ca.
+
+2. Does the abundance of worms differ between Donnerville and the Kip Tract?
+
+3. Does the abundance of soil Magnesium (Mg_ppm) differ between Peavine and South Hammond?
+
+4. Does the abundance of zinc (Zn_ppm) differ among forests?
+
+
+
+
