@@ -98,3 +98,4 @@ ggplot(plant_gr, aes(x = soil.moisture.content, y = plant.growth.rate)) +
 
 
 
+
