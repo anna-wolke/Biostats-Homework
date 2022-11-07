@@ -89,10 +89,48 @@ ggplot(plant_gr, aes(x = soil.moisture.content, y = plant.growth.rate)) +
 
 # Analysis of variance: the one-way ANOVA
 
+For this kind of test, the explanatory variable is categorical. In the following example, we will analyze a data frame with multiple levels of a variable.
 
+Setting things up:
+```{r}
+rm(list=ls())
+library(here)
+library(ggplot2)
+library(dplyr)
+library(ggfortify)
+```
 
+Import the data:
+```{r}
+daphnia <- read.csv(here("Data", "Daphniagrowth.csv"))
+glimpse(daphnia)
+# glimpsing the data shows me that I have character, integer, and decimal variables
+```
 
+First, model the data with a boxplot to view the variation in the response variable as a function of grouping.
+```{r}
+ggplot(daphnia, aes(x = parasite, y = growth.rate)) +
+  geom_boxplot() +
+  theme_bw() +
+  coord_flip() # this switches the x and y axes
+```
+Just by looking at this model, there appears to be a difference in growth rate based on different types of parasites. The control treatment appears to produce the highest growth rate.
 
+Time to construct the linear model... We will use lm() to perform the one-way ANOVA
+```{r}
+model_grow <- lm(growth.rate ~ parasite, data = daphnia)
+```
+
+Just like with the linear regression model, we make 4 diagnostic graphs using autoplot()
+```{r}
+autoplot(model_grow, smooth.colour = NA)
+```
+
+We can then draw conclusions using anova() and summary()
+```{r}
+anova(model_grow)
+```
+This shows us that different parasite treatments have produced an effect on growth rate. The small p-value allows us to reject the null hypothesis that there are no differences between treatment groups. The F-value is a ratio (between-group variance : within-group variance) so a large F-value produces a small p-value.
 
 
 
