@@ -83,9 +83,31 @@ anova(SOM_Ca_mod)
 ```
 The p-value is greater than 0.05, so we accept the null hypothesis that there is no relationship between SOM and Ca.
 
-2. Does the abundance of worms differ between Donnerville and the Kip Tract?
+### 2. Does the abundance of worms differ between Donnerville and the Kip Tract?
+
+First, I'll plot the data to get a general idea of the spread of data. 
+```{r}
+ggplot(soil, aes(x = Worms)) +
+  geom_histogram() +
+  facet_wrap(~ Forest, ncol = 1)
+```
+The Donnerville and Kip Tract counts look similar, but it appears there could be some overlap
+
+Let's set up a test to see if there is significant difference in the total worms at these sites. First, I'll calculate the totals for each Forest:
+```{r}
+totals <- soil %>%
+  filter(Forest == "DONNERVILLE" | Forest == "KIP TRACT") %>%
+  group_by(Forest, Worms) %>%
+  summarise(total.number = sum(Worms))
+```
+
+
+
+
 
 3. Does the abundance of soil Magnesium (Mg_ppm) differ between Peavine and South Hammond?
+
+
 
 4. Does the abundance of zinc (Zn_ppm) differ among forests?
 

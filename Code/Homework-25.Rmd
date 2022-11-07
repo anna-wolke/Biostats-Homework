@@ -1,0 +1,100 @@
+---
+title: "Homework-25.Rmd"
+author: "Anna"
+date: "11/3/2022"
+output: html_document
+---
+
+# INTRODUCTION
+## The following script investigates the second half of GSWR ch. 5, linear regression and one-way ANOVA. We will be looking at general linear models, not to be confused with generalized linear models (GLM). 
+* One of the most important functions in this section is lm() which fits linear models. 
+
+A quick reminder about the workflow for this chapter:
+1. Plot
+2. Model
+3. Check assumptions
+4. Interpret
+5. Plot again
+
+# Simple linear regression
+
+Setting things up;
+```{r}
+rm(list=ls())
+library(here)
+library(tidyverse)
+```
+
+Importing the data:
+```{r}
+plant_gr <- read.csv(here("Data", "plant.growth.rate.csv"))
+glimpse(plant_gr)
+```
+
+Model the data:
+```{r}
+ggplot(plant_gr, aes(x = soil.moisture.content, y = plant.growth.rate)) +
+  geom_point() +
+  theme_bw() +
+  ylab("Plant growth rate (mm/week)")
+```
+Just by looking at this figure, I can see that there is a positive relationship between these two variables. By looking at the spread of the data points, we can make an estimate that the slope is about 15 (rise is ~30, run is ~2).
+
+Note: df = (# of data points) - (# of parameters/coefficients)
+
+Now that I have a figure and have examined the data, I can make a simple linear regression using the lm() function:
+```{r}
+model_pgr <- lm(plant.growth.rate ~ soil.moisture.content, data = plant_gr)
+```
+
+Review of steps so far:
+1. Create a linear model with lm()
+2. Import the ggfortify package
+3. Use the autoplot() function
+
+```{r}
+library(ggfortify)
+autoplot(model_pgr, smooth.colour = NA)
+# smooth.colour = NA removes the squiggly lines, replacing them with normal straight lines for analysis
+```
+
+What do these graphs mean?
+1. Residuals vs. Fitted - Tells us if a line fits the data. The example above shows even distribution of the residuals... "hump" or "valley" shapes on this graph would be bad news.
+2. Normal Q-Q - Shows if data are normally distributed. Ddata points should fall along the dotted line.
+3. Scale-Location - Evaluates assumption of equal variance. No pattern should be prevalent between the points.
+4. Residuals vs. Leverage - Detects outliers/influential data points.
+
+## Introducing anova() and summary()
+
+* anova() does NOT perform an ANOVA! (comparison of means). anova() DOES produce a sums-of-squares table (f-value, r-squared, adjusted r-squared).
+* summary() produces a table of the estimates of the coefficients of the "model" line (intercept and slope).
+
+```{r}
+anova(model_pgr) 
+summary(model_pgr)
+```
+From GSWR ch.5, we can make the following cnclusion based on these tests...
+"Soil moisture had a positive effect on plant growth. Fore each unit increase in soil moisture, plant growth rate increased by 12.7 mm/week (slope = 12.7, t = 12.5, df = 48, p < 0.001)."
+
+Next, we need to incorporate the statistical model into our original model by adding a regression line:
+```{r}
+ggplot(plant_gr, aes(x = soil.moisture.content, y = plant.growth.rate)) +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  ylab("Plant growth rate (mm/week)") +
+  theme_bw()
+  
+```
+* This may not work perfectly for more complicated models!
+
+# Analysis of variance: the one-way ANOVA
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,0 @@
----
-title: "Homework-24-DRAFT.Rmd"
-author: "Anna"
-date: "10/28/2022"
-output: html_document
----
