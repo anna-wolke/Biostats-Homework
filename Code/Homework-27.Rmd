@@ -1,0 +1,10 @@
+---
+title: "Homework-27"
+author: "Anna"
+date: "11/8/2022"
+output: html_document
+---
+
+# INTRODUCTION
+In this homework, I will be reading through chapters 1 and 2 ("Introduction" and "First Steps", respectively), of the ggplot2 guide. This guide discusses how to make "elegant graphics for data analysis".
+

@@ -132,7 +132,11 @@ anova(model_grow)
 ```
 This shows us that different parasite treatments have produced an effect on growth rate. The small p-value allows us to reject the null hypothesis that there are no differences between treatment groups. The F-value is a ratio (between-group variance : within-group variance) so a large F-value produces a small p-value.
 
-
+Treatment contrasts... show the difference between the reference level (control) and the other treatmenys
+```{r}
+summary(model_grow)
+```
+*R defaults to representing things in alphabetical order. 
 
 
 
