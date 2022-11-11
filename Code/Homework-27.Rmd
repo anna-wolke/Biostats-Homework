@@ -8,3 +8,49 @@ output: html_document
 # INTRODUCTION
 In this homework, I will be reading through chapters 1 and 2 ("Introduction" and "First Steps", respectively), of the ggplot2 guide. This guide discusses how to make "elegant graphics for data analysis".
 
+# CHAPTER 1
+
+## 1.1 Welcome to ggplot2
+ggplot2 uses the "Grammar of Graphics" which means it combines individual components to create figures. This allows for greater customization! 
+
+This system works with layers, starting with the raw data and then adding annotations and stat summaries. Compared to base R, ggplot2 more easily allows you to combine graphics with other data sets and plots. 
+
+## 1.2 What is the grammar of graphics?
+"A graphic maps the data to the aesthetic attributes (colour, shape, size) of geometric objects (points, lines, bars)" ... the plot can also include stats transformations, info about the plots' coordinate system, and facetting.
+
+Five mapping components:
+
+1. Layer - Geometric elements (geom) and stats transformations (stat). 
+
+2. Scale - Map data values to aesthetic values (color, shape, size, legend, axes).
+
+3. Coord - Coordinate system to place data on a graphic plane (includes axes and gridlines).
+
+4. Facet - Breaks up data into subsets.
+
+5. Theme - Controls the general display, like font size and background color.
+
+**The grammar for ggplot2 does NOT suggest which graphic to use or describe interactive graphics. 
+
+## 1.3 How does ggplot2 fit in with other R graphics?
+- Base R only lets you draw on top of a plot, not delete or modify existing content. They are simple and fast, but have a limited scope.
+
+- Grid graphics is more complex than Base R, but does not have any tools for creating statistical graphics
+
+- Lattice graphics lacks a formal model 
+
+... with this in mind, ggplot2 aims to combine the good things about lattice and base graphics to create a strong model for creating graphics. It uses a grid to draw its graphics, which controls the appearance. With ggplot2, it is easy to introduce statistical graphics in adddition to plots. 
+
+## 1.4 About this book
+Chapter 2 - introduces geoms, aesthetic mappings, and facetting.
+
+Chapters 3-9 - explains how to use the basic toolbox to fix common issues with data visualization.
+
+Chapters 10-12 - 
+
+
+
+
+
+
+
