@@ -46,11 +46,113 @@ Chapter 2 - introduces geoms, aesthetic mappings, and facetting.
 
 Chapters 3-9 - explains how to use the basic toolbox to fix common issues with data visualization.
 
-Chapters 10-12 - 
+Chapters 10-12 - controlling scales (axes, legends)
+
+Chapter 13-14 - explanation of layering grammar 
+
+Chapter 18 - theming system and saving plots
 
 
+# CHAPTER 2
 
+## 2.2 Fuel Economy data
 
+Let's learn the basics of creting quick and easy plots with ggplot2...
+
+Import the mpg data included in ggplot:
+```{r}
+library(ggplot2)
+mpg
+```
+
+Variable descriptions:
+
+1. 'cty' and 'hwy' record mpg for city and highway driving
+
+2. 'displ' is engine displacement in liters
+
+3. 'drv' is the drivetrain (f = front wheel, r = rear wheel, 4 = four wheel)
+
+4. 'model' is the car model
+
+5. 'class' is the type of car (two seater, SUV, compact...)
+
+## 2.3 Key Components
+
+Every ggplot2 plot has 3 components:
+
+1. data
+
+2. aesthetic mappings
+
+3. geom layer(s)
+
+Example:
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point()
+```
+Layers are added with a '+' symbol
+
+You could also be more efficient by not naming x and y, instead using this code:
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+```
+ggplot2 recognizes that most plots have x and y axes, so these are the first two arguments in aes().
+
+## 2.4 Color, size, shape and other aes() attributes
+
+Let's look at the color argument:
+```{r}
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+```
+This changes the colors of the points based on class, so it is easier to see any patterns based on grouping for this variable.
+
+Compare the differences between these plots:
+```{r}
+ggplot(mpg, aes(displ, hwy)) + geom_point(aes(colour = "blue"))
+ggplot(mpg, aes(displ, hwy)) + geom_point(colour = "blue")
+```
+Assigning a color outside of the aes() function changes the actual color of the points to the colors provided in R. 
+
+*Color and shape work best for categorical variables, size works well for continuous data
+
+## 2.5 Faceting
+
+Two types of faceting: grid and wrapped
+
+facet_wrap(~) is a useful function. It splits the data into groups based on he name you input after '~'
+
+For example...
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  facet_wrap(~class)
+```
+
+## 2.6 Plot geoms
+
+Create different kinds of plots by selecting different geom layers, such as:
+
+geom_smooth() - fits a smoother to the data
+
+geom_boxplot()
+
+geom_histogram()
+
+geom_bar() - for categorical variables
+
+geom_path() - draws a line between data points
+
+*You can add a smoother to a scatteplot by adding it as another layer:
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  geom_smooth()
+# to turn off the assessment of uncertainty, insert 'se = FALSE' into the geom_smooth() function
+```
 
 
 
