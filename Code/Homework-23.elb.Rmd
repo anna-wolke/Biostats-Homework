@@ -1,0 +1,89 @@
+---
+title: "Homework-23.Rmd"
+author: "Anna"
+date: "10/24/2022"
+output: html_document
+---
+
+Setting things up
+```{r}
+rm(list=ls())
+library(here)
+library(dplyr)
+library(ggplot2)
+```
+
+Import data
+```{r}
+DF <- read.csv(here("Data", "soil_data.csv"))
+glimpse(DF)
+```
+
+Make a new column with 'Field.name' values as just the site name
+```{r}
+DF <- DF %>%
+  mutate(Site = case_when(
+    startsWith(Field.Name, "DEGRASSE") ~ "Degrasse", 
+    startsWith(Field.Name, "DONNERVILLE") ~ "Donnerville", 
+    startsWith(Field.Name, "KIP") ~ "Kip Tract", 
+    startsWith(Field.Name, "PEAVINE") ~ "Peavine", 
+    startsWith(Field.Name, "SOUTH") ~ "South Hammond"
+    ))
+```
+NICE APPROACH. HERE'S AN EVEN EASIER WAY WITH STRINGR PACKAGE
+```{r}
+library(tidyverse)
+DF$Forest<-word(DF$Field.Name, 1)
+```
+
+
+Making a scatterplot of the SOM_percent data based on site
+```{r}
+ggplot(DF, aes(x = Site, y = SOM_percent)) +
+  geom_point() +
+  xlab("Sample Site") +
+  ylab("Soil Organic Matter %") +
+  theme_bw()
+```
+
+Making a boxplot with SOM_percent data based on site
+```{r}
+ggplot(DF, aes(x = Site, y = SOM_percent)) +
+  geom_boxplot() +
+  xlab("Sample Site") +
+  ylab("Soil Organic Matter %") +
+  theme_bw()
+```
+
+Making a histogram with SOM_percent data
+```{r}
+ggplot(DF, aes(x = SOM_percent)) +
+  geom_histogram() +
+  xlab("Soil Organic Matter %")
+```
+
+Making a scatterplot with Ca.ppm data based on site
+```{r}
+ggplot(DF, aes(x = Site, y = Ca.ppm)) +
+  geom_point() +
+  xlab("Sample Site") +
+  ylab("Soil Calcium (ppm)") +
+  theme_bw()
+```
+
+Making a boxplot with Ca.ppm data based on site
+```{r}
+ggplot(DF, aes(x = Site, y = Ca.ppm)) +
+  geom_boxplot() +
+  xlab("Sample Site") +
+  ylab("Soil Calcium (ppm)") +
+  theme_bw()
+```
+
+Making a histogram with Ca.ppm data
+```{r}
+ggplot(DF, aes(x = Ca.ppm)) +
+  geom_histogram() +
+  xlab("Soil Calcium (ppm)")
+```
+
